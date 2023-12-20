@@ -1,9 +1,9 @@
 <?php
 /*****************************************************/
-# Role
-# Page/Class name   : Role
+# CmsLocal
+# Page/Class name   : CmsLocal
 # Author            :
-# Created Date      : 23-08-2019
+# Created Date      : 24-05-2019
 # Functionality     : Table declaration
 # Purpose           : Table declaration
 /*****************************************************/
@@ -12,9 +12,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RolePage extends Model
+class CmsLocal extends Model
 {
-    protected $table = 'role_pages';
-
-    public $timestamps = false;
+    public  $timestamps = false;
 }

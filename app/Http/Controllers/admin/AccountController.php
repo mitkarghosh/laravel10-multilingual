@@ -7,6 +7,14 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Http\Traits\GeneralMethodsTrait;
 use App\Models\User;
+use App\Models\Product;
+use App\Models\DeliverySlot;
+use App\Models\Order;
+use App\Models\PaymentSetting;
+use App\Models\Drink;
+use App\Models\SpecialMenu;
+use App\Models\Category;
+use App\Models\Tag;
 
 class AccountController extends Controller
 {
@@ -64,20 +72,38 @@ class AccountController extends Controller
         ];
 
         try {
-            $data['totalCustomers']         = User::where(['status' => '1','type' => 'C'])->whereNull(['role_id','deleted_at'])->count();
-            $data['totalEntrepreneurs']     = User::where(['status' => '1','type' => 'AD'])->whereNull(['role_id','deleted_at'])->count();
+            $data['totalUser'] = User::where(['status' => '1', 'type' => 'C'])->whereNull('role_id')->whereNull('deleted_at')->count();
+            $data['totalProducts'] = Product::where('status', '1')->whereNull('deleted_at')->count();
+            $data['totalOrders'] = Order::where('order_status', 'O')->count();
+            $data['totalOrdersDelivered'] = Order::where(['order_status' => 'O', 'status' => 'D'])->count();
+            $data['totalNewOrders'] = Order::where(['order_status' => 'O', 'status' => 'P', 'is_print' => '0'])->count();
+            $data['totalOrdersProcessing'] = Order::where(['order_status' => 'O', 'status' => 'P', 'is_print' => '1'])->count();
+            $data['newOrdersListing'] = Order::where(['order_status' => 'O', 'status' => 'P', 'is_print' => '0'])->orderBy('created_at', 'desc')->limit(9)->get();
+            $data['processingOrdersListing'] = Order::where(['order_status' => 'O', 'status' => 'P', 'is_print' => '1'])->orderBy('created_at', 'desc')->limit(9)->get();
+            $data['newUsers'] = User::where(['status' => '1', 'type' => 'C'])->orderBy('created_at', 'desc')->whereNull('deleted_at')->limit(15)->get();
+            $data['toatlActiveDrinks'] = Drink::where(['status' => '1'])->whereNull('deleted_at')->count();
+            $data['toatlInactiveDrinks'] = Drink::where(['status' => '0'])->whereNull('deleted_at')->count();
+            $data['toatlActiveSpecials'] = SpecialMenu::where(['status' => '1'])->whereNull('deleted_at')->count();
+            $data['toatlInactiveSpecials'] = SpecialMenu::where(['status' => '0'])->whereNull('deleted_at')->count();
+            $data['toatlActiveCategories'] = Category::where(['status' => '1'])->whereNull('deleted_at')->count();
+            $data['toatlInactiveCategories'] = Category::where(['status' => '0'])->whereNull('deleted_at')->count();
+            $data['toatlActiveTags'] = Tag::where(['status' => '1'])->whereNull('deleted_at')->count();
+            $data['toatlInactiveTags'] = Tag::where(['status' => '0'])->whereNull('deleted_at')->count();
             
             return view($this->viewFolderPath.'.dashboard', $data);
         } catch (Exception $e) {
-            Auth::guard('admin')->logout();
-            $this->generateToastMessage('error', trans('custom_admin.error_something_went_wrong'), false);
-            return redirect()->route($this->routePrefix.'.login');
+            dd($e->getMessage());
 
-        } catch (\Throwable $e) {
             Auth::guard('admin')->logout();
-            $this->generateToastMessage('error', $e->getMessage(), false);
+            $this->generateFlashMessage('error', __('admin.error_something_went_wrong'), false);
+            return redirect()->route($this->routePrefix.'.'.\App::getLocale().'.login')->withInput();
+        } catch (\Throwable $e) {
+            dd($e->getMessage());
+
+            Auth::guard('admin')->logout();
+            $this->generateFlashMessage('error', $e->getMessage(), false);
             
-            return redirect()->route($this->routePrefix.'.login');
+            return redirect()->route($this->routePrefix.'.'.\App::getLocale().'.login')->withInput();
         }
     }
 

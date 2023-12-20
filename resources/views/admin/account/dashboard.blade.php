@@ -5,9 +5,10 @@
 <section class="dsbrd py-5">
 	<div class="container">
 		<div class="dsbrd-hd text-center mb-5">
-			<h1>Welcome To SM Icecream Software</h1>
+			<h1>{{ __('admin.label_dashboard') }} of {{ getAppName() }}</h1>
 		</div>
 		<div class="row g-4 justify-content-center">
+			{{-- user start --}}
 			<div class="col-lg-3">
 				<div class="card text-center">
 					<div class="dsbrd-card-hover">
@@ -16,12 +17,13 @@
 					</div>
 					<div class="card-body">
 						<div class="dsbrd-icn">
-							<i class="ti ti-box"></i>
+							{{ $totalUser }}
 						</div>
-						<h5 class="card-title"> Product</h5>
+						<h5 class="card-title"><i class="fa fa-users"></i> {{ __('admin.dashboard_total_active_users') }}</h5>
 					</div>
 				</div>
 			</div>
+			{{-- user end --}}
 			<div class="col-lg-3">
 				<div class="card text-center">
 					<div class="dsbrd-card-hover">

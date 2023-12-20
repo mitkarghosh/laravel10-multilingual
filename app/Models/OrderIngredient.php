@@ -1,6 +1,6 @@
 <?php
 /*****************************************************/
-# Page/Class name   : Cms
+# Page/Class name   : OrderIngredient
 # Purpose           : Table declaration
 /*****************************************************/
 
@@ -8,13 +8,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cms extends Model
+class OrderIngredient extends Model
 {
+    public $timestamps = false;
+
     /*****************************************************/
-    # Function name : local
+    # Function name : orderIngredientLocals
     # Params        : 
     /*****************************************************/
-    public function local() {
-        return $this->hasMany('App\Models\CmsLocal', 'page_id');
+    public function orderIngredientLocals() {
+        return $this->hasMany('App\Models\OrderIngredientLocal', 'order_ingredient_id');
     }
+
 }

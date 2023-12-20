@@ -1,20 +1,21 @@
 <?php
 /*****************************************************/
-# Page/Class name   : Cms
-# Purpose           : Table declaration
+# Pagen/Class name   : ProductTag
 /*****************************************************/
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cms extends Model
+class ProductTag extends Model
 {
-    /*****************************************************/
+  public $timestamps = false;
+
+  /*****************************************************/
     # Function name : local
     # Params        : 
     /*****************************************************/
-    public function local() {
-        return $this->hasMany('App\Models\CmsLocal', 'page_id');
-    }
+	public function tagDetails() {
+		return $this->belongsTo('App\Models\Tag', 'tag_id');
+  }
+  
 }

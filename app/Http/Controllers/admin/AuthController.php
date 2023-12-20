@@ -83,13 +83,13 @@ class AuthController extends Controller
                                 $user  = \Auth::guard('admin')->user();
                                 $user->lastlogintime = strtotime(date('Y-m-d H:i:s'));
                                 $user->save();
-                                return redirect()->route($this->routePrefix.'.dashboard');
+                                return redirect()->route($this->routePrefix.'.'.\App::getLocale().'.dashboard');
                             }                            
                         } else if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password, 'type' => 'A', 'status' => '1'])) {
                             $user  = \Auth::guard('admin')->user();
                             $user->lastlogintime = strtotime(date('Y-m-d H:i:s'));
                             $user->save();
-                            return redirect()->route($this->routePrefix.'.dashboard');                            
+                            return redirect()->route($this->routePrefix.'.'.\App::getLocale().'.dashboard');                            
                         } else {
                             $this->generateFlashMessage('error', __('admin.error_invalid_credentials_inactive_user'), false);
                             return redirect()->route($this->routePrefix.'.'.\App::getLocale().'.login')->withInput();
@@ -103,9 +103,13 @@ class AuthController extends Controller
                 return view($this->viewFolderPath.'.login', $data);
 
             } catch (Exception $e) {
+                dd($e->getMessage());
+
                 $this->generateFlashMessage('error', __('admin.error_invalid_credentials'), false);
                 return redirect()->route($this->routePrefix.'.'.\App::getLocale().'.login')->withInput();
             } catch (\Throwable $e) {
+                dd($e->getMessage());
+                
                 $this->generateFlashMessage('error', $e->getMessage(), false);
                 return redirect()->route($this->routePrefix.'.'.\App::getLocale().'.login')->withInput();
             }

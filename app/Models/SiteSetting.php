@@ -1,9 +1,9 @@
 <?php
 /*****************************************************/
-# Role
-# Page/Class name   : Role
+# SiteSetting
+# Page/Class name   : SiteSetting
 # Author            :
-# Created Date      : 23-08-2019
+# Created Date      : 23-05-2019
 # Functionality     : Table declaration
 # Purpose           : Table declaration
 /*****************************************************/
@@ -12,9 +12,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RolePage extends Model
+class SiteSetting extends Model
 {
-    protected $table = 'role_pages';
-
     public $timestamps = false;
+    
+    protected $hidden = ['id'];
+
 }
