@@ -17,7 +17,7 @@ use App\Models\WebsiteSetting;
     * Return Value  : 
 */
 function getAppName() {
-    return 'Made In The Six';
+    return 'Laravel 10';
 }
 
 /*

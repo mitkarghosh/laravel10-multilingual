@@ -1,45 +1,50 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<!-- onpage -->
-	<meta name="description" content="">
-    <meta name="keywords" content="">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-	<title>Administrator - SM Icecream</title>
+  <title>Admin</title>
+  <!-- plugins:css -->
+  <link href="{{ asset('css/admin/vendors/iconfonts/font-awesome/css/all.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/admin/vendors/css/vendor.bundle.base.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/admin/vendors/css/vendor.bundle.addons.css') }}" rel="stylesheet">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{{ asset('images/admin/favicon.png') }}" />
 
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-	<link rel="icon" href="favicon.ico" type="image/x-icon">
+  <!-- plugins:js -->
+  <script src="{{ asset('js/admin/vendors/vendor.bundle.base.js') }}"></script>
+  <script src="{{ asset('js/admin/vendors/vendor.bundle.addons.js') }}"></script>
 
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	
-	<!-- Styles -->
-    <link href="{{ asset('css/admin/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/fontawesome6.all.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/style-core.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/admin/style.css') }}" rel="stylesheet">
-
-    <script src="{{ asset('js/admin/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/admin/jquery.validate.min.js') }}"></script>
+  {{-- <script src="{{ asset('js/admin/jquery.min.js') }}"></script> --}}
+  <script src="{{ asset('js/admin/jquery.validate.min.js') }}"></script>
 </head>
+
 <body>
-    @include('admin.includes.notification')
-    
-	<main class="login-pg-main">
-        @yield('content')
-	</main>
+  @include('admin.includes.notification')
 
-    <button class="go-to-top"><i class="fa-solid fa-chevron-up"></i></button>	
+  @yield('content')
 
-    <!-- scripts -->
-    <script src="{{ asset('js/admin/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('js/admin/development_admin_'.\App::getLocale().'.js') }}"></script>
+  <!-- container-scroller -->
+  
+  <!-- endinject -->
+  <!-- inject:js -->
+  {{-- <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/misc.js"></script>
+  <script src="../../js/settings.js"></script>
+  <script src="../../js/todolist.js"></script> --}}
+  <!-- endinject -->
 
+  <script src="{{ asset('js/admin/development_admin_'.\App::getLocale().'.js') }}"></script>
 </body>
 </html>

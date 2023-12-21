@@ -172,4 +172,13 @@ class AuthController extends Controller
     {
         //
     }
+
+    public function logout()
+    {
+        if (Auth::guard('admin')->logout()) {
+            return redirect()->route('admin.'.\App::getLocale().'.login'); // if logout is successful, proceed to login page
+        } else {
+            return redirect()->route('admin.'.\App::getLocale().'.dashboard'); // if logout fails, redirect tyo dashboard
+        }
+    }
 }

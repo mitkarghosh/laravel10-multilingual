@@ -36,6 +36,12 @@ Route::group(['namespace' => 'admin', 'prefix' => 'adminpanel', 'as' => 'admin.'
 					Route::any('/dashboard', 'dashboard')->name('dashboard');
 					Route::any('/profile', 'profile')->name('profile');
 				});
+
+
+				Route::controller(AuthController::class)->group(function() {
+					Route::any('/logout', 'logout')->name('logout');
+				});
+				
 			// })
 			
 
